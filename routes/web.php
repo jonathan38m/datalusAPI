@@ -18,4 +18,11 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         return \Illuminate\Support\Facades\Auth::user();
     });
     $router->get('phones', 'PhoneController@index');
+    $router->group(['middleware' => 'body'], function () use ($router) {
+        $router->post('phones', 'PhoneController@store');
+        $router->put('phones/{id}', 'PhoneController@update');
+    });
+
+    $router->get('phones/{id}', 'PhoneController@show');
+    $router->delete('phones/{id}', 'PhoneController@destroy');
 });
